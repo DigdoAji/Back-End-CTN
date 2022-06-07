@@ -9,14 +9,14 @@ const contentArticles = [
         categories: 'Tourism',
         userReviews: [
           {
-              name: 'Ahmad',
-              date: '13 November 2020',
-              review: 'Very Exotic!',
+              name: 'Bagas',
+              date: '20 May 2022',
+              review: 'Best spot ever and instagramable!',
           },
           {
-              name: 'Dewi',
-              date: '20 November 2021',
-              review: 'Beautiful',
+              name: 'Putri',
+              date: '21 may 2022',
+              review: 'Samosir is Very Beautiful',
           },
       ],
     },
@@ -31,13 +31,8 @@ const contentArticles = [
         userReviews: [
           {
               name: 'Ahmad',
-              date: '13 November 2020',
-              review: 'Very Exotic!',
-          },
-          {
-              name: 'Dewi',
-              date: '20 November 2021',
-              review: 'Beautiful',
+              date: '25 May 2022',
+              review: 'This is where you can relax and enjoy the nature',
           },
       ],
     },
@@ -51,14 +46,14 @@ const contentArticles = [
         categories: 'Tourism',
         userReviews: [
           {
-              name: 'Ahmad',
-              date: '13 November 2020',
-              review: 'Very Exotic!',
+              name: 'Raden',
+              date: '30 May 2022',
+              review: 'What a nice view',
           },
           {
-              name: 'Dewi',
-              date: '20 November 2021',
-              review: 'Beautiful',
+              name: 'Halmahera',
+              date: '31 May 2022',
+              review: 'Beautiful and Very Exotic',
           },
       ],
     },
@@ -72,14 +67,14 @@ const contentArticles = [
         categories: 'Culture',
         userReviews: [
           {
-              name: 'Ahmad',
-              date: '13 November 2020',
-              review: 'Very Exotic!',
+              name: 'Salim',
+              date: '03 June 2022',
+              review: 'What a unique culture',
           },
           {
-              name: 'Dewi',
-              date: '20 November 2021',
-              review: 'Beautiful',
+              name: 'Jane',
+              date: '04 June 2022',
+              review: 'Indonesia so unique',
           },
       ],
     },     

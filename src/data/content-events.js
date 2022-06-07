@@ -10,14 +10,9 @@ const contentEvents = [
         categories: 'Culture, Festival',
         userReviews: [
           {
-              name: 'Ahmad',
-              date: '13 November 2020',
-              review: 'Very Exotic!',
-          },
-          {
-              name: 'Dewi',
-              date: '20 November 2021',
-              review: 'Beautiful',
+              name: 'Roni',
+              date: '24 February 2022',
+              review: 'My Culture My Life!',
           },
         ],
       },
@@ -32,14 +27,14 @@ const contentEvents = [
         categories: 'Tourism, Culture',
         userReviews: [
           {
-              name: 'Ahmad',
-              date: '13 November 2020',
-              review: 'Very Exotic!',
+              name: 'Indra',
+              date: '10 April 2022',
+              review: 'Let introduction of Our Traditional Dance',
           },
           {
-              name: 'Dewi',
-              date: '20 November 2021',
-              review: 'Beautiful',
+              name: 'Tasya',
+              date: '11 April 2022',
+              review: 'I will come to that event',
           },
         ],
       },
@@ -54,14 +49,14 @@ const contentEvents = [
         categories: 'Tourism, Culture, Competition',
         userReviews: [
           {
-              name: 'Ahmad',
-              date: '13 November 2020',
-              review: 'Very Exotic!',
+              name: 'Jaka',
+              date: '01 May 2022',
+              review: 'Best competition must come!',
           },
           {
-              name: 'Dewi',
-              date: '20 November 2021',
-              review: 'Beautiful',
+              name: 'Ihsan',
+              date: '10 Mei 2022',
+              review: 'its from my hometown',
           },
         ],
       },
@@ -76,14 +71,9 @@ const contentEvents = [
         categories: 'Culture, Festival',
         userReviews: [
           {
-              name: 'Ahmad',
-              date: '13 November 2020',
-              review: 'Very Exotic!',
-          },
-          {
-              name: 'Dewi',
-              date: '20 November 2021',
-              review: 'Beautiful',
+              name: 'Lendra',
+              date: '30 May 2022',
+              review: 'Interesting Festival',
           },
         ],
       },
