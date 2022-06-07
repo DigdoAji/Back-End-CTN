@@ -1,6 +1,6 @@
 const contentArticles = [
     {
-        id: 'RcU4x3cYEpU6A0ue',
+        id: '3988pcb6s9o0jue9',
         name: '7 Best Tourist Attractions on Samosir Island',
         description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.',
         pictureId: 'https://i.postimg.cc/0j4FpcN7/homestay-di-pulau-samosir.jpg',
@@ -21,7 +21,7 @@ const contentArticles = [
       ],
     },
     {
-        id: '4JMFHjHANrtaAsyO',
+        id: '6u4whqwzlz6xaqej',
         name: 'Batu Seribu Nature Tourism, the Masterpiece of Gunung Sewu UNESCO Global Geopark',
         description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.',
         pictureId: 'https://i.postimg.cc/6q8CGhgs/fasilitas-di-batu-seribu.webp',
@@ -63,7 +63,7 @@ const contentArticles = [
       ],
     },
     {
-        id: 'rw8eVeNBwxIQcp',
+        id: 'c4vh1qan2tdkzkyz',
         name: 'Get to know the tradition of pointy teeth in the style of the Mentawai Tribe which is a symbol of beauty',
         description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.',
         pictureId: 'https://i.postimg.cc/qvzWvfjQ/gigiruncingjpg-629973babb44865cea37b2a4.jpg',

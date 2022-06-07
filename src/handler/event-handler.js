@@ -13,7 +13,7 @@ const insertNewEvent = (request, h) => {
       categories,
     } = request.payload;
 
-    const id = nanoid(16);
+    const id = nanoid(16).toLowerCase();
 
     if (!name) {
       return h.response({
