@@ -177,6 +177,7 @@ const insertEventReview = (request, h) => {
     review,
   } = request.payload;
 
+  const reviewId = nanoid(6).toLowerCase();
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   const date = new Date().toLocaleDateString('en-GB', options);
 
@@ -198,6 +199,7 @@ const insertEventReview = (request, h) => {
 
   const findIdEvent = events.findIndex((eventIndex) => eventIndex.id === id);
   events[findIdEvent].userReviews.push({
+    reviewId,
     name,
     date,
     review
@@ -210,6 +212,7 @@ const insertEventReview = (request, h) => {
       status: 'success',
       message: 'show comment of selected event',
       userReviews: events[findIdEvent].userReviews.map((item) => ({
+        reviewId : item.reviewId,
         name: item.name,
         date: item.date,
         review: item.review
@@ -230,7 +233,7 @@ const insertEventReview = (request, h) => {
 const removeEventReview = (request, h) => {
   const { 
     id,
-    name
+    reviewId,
    } = request.payload;
 
   if (!id) {
@@ -242,7 +245,7 @@ const removeEventReview = (request, h) => {
   }
   
   const isReviewDeleted = events.findIndex((eventIndex) => eventIndex.id === id);
-  const findReviewUser = events.findIndex((user) => user.name === name);
+  const findReviewUser = events[isReviewDeleted].userReviews.findIndex((user) => user.reviewId === reviewId);
   if (isReviewDeleted !== -1){
     events[isReviewDeleted].userReviews.splice(findReviewUser, 1);
     return h.response({
@@ -250,6 +253,7 @@ const removeEventReview = (request, h) => {
       status: 'success',
       message: 'Review event has been removed',
       userReviews: events[isReviewDeleted].userReviews.map((item) => ({
+        reviewId : item.reviewId,
         name: item.name,
         date: item.date,
         review: item.review

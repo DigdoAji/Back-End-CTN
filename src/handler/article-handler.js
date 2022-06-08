@@ -172,6 +172,7 @@ const insertArticleReview = (request, h) => {
     review,
   } = request.payload;
 
+  const reviewId = nanoid(6).toLowerCase();
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   const date = new Date().toLocaleDateString('en-GB', options);
 
@@ -193,6 +194,7 @@ const insertArticleReview = (request, h) => {
 
   const findIdArticle = articles.findIndex((articleIndex) => articleIndex.id === id);
   articles[findIdArticle].userReviews.push({
+    reviewId,
     name,
     date,
     review
@@ -205,6 +207,7 @@ const insertArticleReview = (request, h) => {
       status: 'success',
       message: 'show commment of selected article',
       userReviews: articles[findIdArticle].userReviews.map((item) => ({
+        reviewId : item.reviewId,
         name: item.name,
         date: item.date,
         review: item.review
@@ -225,7 +228,7 @@ const insertArticleReview = (request, h) => {
 const removeArticleReview = (request, h) => {
   const { 
     id,
-    name
+    reviewId,
    } = request.payload;
 
   if (!id) {
@@ -237,7 +240,7 @@ const removeArticleReview = (request, h) => {
   }
   
   const isReviewDeleted = articles.findIndex((articleIndex) => articleIndex.id === id);
-  const findReviewUser = articles.findIndex((user) => user.name === name);
+  const findReviewUser = articles[isReviewDeleted].userReviews.findIndex((user) => user.reviewId === reviewId);
   if (isReviewDeleted !== -1){
     articles[isReviewDeleted].userReviews.splice(findReviewUser, 1);
     return h.response({
@@ -245,6 +248,7 @@ const removeArticleReview = (request, h) => {
       status: 'success',
       message: 'Review Article has been removed',
       userReviews: articles[isReviewDeleted].userReviews.map((item) => ({
+        reviewId : item.reviewId,
         name: item.name,
         date: item.date,
         review: item.review
