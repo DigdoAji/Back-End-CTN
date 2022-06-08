@@ -17,7 +17,7 @@ const insertNewArticle = (request, h) => {
     if (!name) {
       return h.response({
         status: 'fail',
-        message: 'Gagal menambahkan buku. Mohon isi nama buku',
+        message: 'Failed Adding Article. Please insert name of the article',
       }).code(400);
     }
 
@@ -35,14 +35,14 @@ const insertNewArticle = (request, h) => {
     if (isDataInserted) {
       return h.response({
         status: 'success',
-        message: 'Artikel berhasil ditambahkan',
+        message: 'New Article has been Added',
         articleId: id,
       }).code(201);
     }
 
     const response = h.response({
       status: 'error',
-      message: 'Artikel gagal ditambahkan',
+      message: 'Article failed to add',
     });
     response.code(500);
     return response;
@@ -82,7 +82,7 @@ const getDetailArticleById = (request, h) => {
     
     const response = h.response({
       status: 'fail',
-      message: 'Artikel tidak ditemukan',
+      message: 'Article Not Found',
     });
     response.code(404);
     return response;
@@ -103,7 +103,7 @@ const updateArticleById = (request, h) => {
   if (!name) {
     return h.response({
       status: 'fail',
-      message: 'Gagal memperbarui artikel. Mohon isi nama buku',
+      message: 'Failed Update Article. Please insert name of the article',
     }).code(400);
   }
   
@@ -120,13 +120,13 @@ const updateArticleById = (request, h) => {
     };
     return h.response({
       status: 'success',
-      message: 'Artikel berhasil diperbarui',
+      message: 'Article has been updated',
     }).code(200);
   }
 
   const response = h.response({
     status: 'fail',
-    message: 'Gagal memperbarui artikel. Id tidak ditemukan',
+    message: 'Article failed to update. Article ID not found',
   });
   response.code(404);
   return response;
@@ -141,13 +141,13 @@ const removeArticleById = (request, h) => {
     articles.splice(isArticleDeleted, 1);
     return h.response({
       status: 'success',
-      message: 'Artikel berhasil dihapus',
+      message: 'Selected article has been removed',
     }).code(200);
   }
 
   const response = h.response({
     status: 'fail',
-    message: 'Artikel gagal dihapus. Id tidak ditemukan',
+    message: 'Selected article failed to remove. Article ID Not Found',
   });
   response.code(404);
   return response;

@@ -18,7 +18,7 @@ const insertNewEvent = (request, h) => {
     if (!name) {
       return h.response({
         status: 'fail',
-        message: 'Gagal menambahkan buku. Mohon isi nama buku',
+        message: 'Failed Adding Event. Please insert name of the event',
       }).code(400);
     }
 
@@ -37,14 +37,14 @@ const insertNewEvent = (request, h) => {
     if (isDataInserted) {
       return h.response({
         status: 'success',
-        message: 'Event berhasil ditambahkan',
+        message: 'New Event has been Added',
         eventId: id,
       }).code(201);
     }
 
     const response = h.response({
       status: 'error',
-      message: 'Event gagal ditambahkan',
+      message: 'Event failed to add',
     });
     response.code(500);
     return response;
@@ -85,7 +85,7 @@ const getDetailEventById = (request, h) => {
     
     const response = h.response({
       status: 'fail',
-      message: 'Event tidak ditemukan',
+      message: 'Event not found',
     });
     response.code(404);
     return response;
@@ -107,7 +107,7 @@ const updateEventById = (request, h) => {
   if (!name) {
     return h.response({
       status: 'fail',
-      message: 'Gagal memperbarui event. Mohon isi nama buku',
+      message: 'Event failed to Update. Please insert name of the event',
     }).code(400);
   }
   
@@ -125,13 +125,13 @@ const updateEventById = (request, h) => {
     };
     return h.response({
       status: 'success',
-      message: 'Event berhasil diperbarui',
+      message: 'Article has been updated',
     }).code(200);
   }
 
   const response = h.response({
     status: 'fail',
-    message: 'Gagal memperbarui event. Id tidak ditemukan',
+    message: 'Event Failed to update. Event Id not found',
   });
   response.code(404);
   return response;
@@ -146,13 +146,13 @@ const removeEventById = (request, h) => {
     events.splice(isEventDeleted, 1);
     return h.response({
       status: 'success',
-      message: 'Event berhasil dihapus',
+      message: 'Article has been removed',
     }).code(200);
   }
 
   const response = h.response({
     status: 'fail',
-    message: 'Event gagal dihapus. Id tidak ditemukan',
+    message: 'Event failed to remove. Event Id not found',
   });
   response.code(404);
   return response;
