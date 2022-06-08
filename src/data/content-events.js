@@ -50,12 +50,12 @@ const contentEvents = [
         userReviews: [
           {
               name: 'Jaka',
-              date: '01 May 2022',
+              date: '1 May 2022',
               review: 'Best competition must come!',
           },
           {
               name: 'Ihsan',
-              date: '10 Mei 2022',
+              date: '10 May 2022',
               review: 'its from my hometown',
           },
         ],

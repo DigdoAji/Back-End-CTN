@@ -17,6 +17,7 @@ const insertNewEvent = (request, h) => {
 
     if (!name) {
       return h.response({
+        error: true,
         status: 'fail',
         message: 'Failed Adding Event. Please insert name of the event',
       }).code(400);
@@ -36,6 +37,7 @@ const insertNewEvent = (request, h) => {
     const isDataInserted = events.filter((eventInserted) => eventInserted.id === id).length > 0;
     if (isDataInserted) {
       return h.response({
+        error: false,
         status: 'success',
         message: 'New Event has been Added',
         eventId: id,
@@ -43,6 +45,7 @@ const insertNewEvent = (request, h) => {
     }
 
     const response = h.response({
+      error: true,
       status: 'error',
       message: 'Event failed to add',
     });
@@ -53,8 +56,9 @@ const insertNewEvent = (request, h) => {
 // Get All events
 const getAllEvents = (request, h) => {
     const response = h.response({
-        error: false,
-        message: 'success',
+      error: false,
+      status: 'success',
+      message: 'Show all event data',
         contentEvents: events.map((item) => ({
           id: item.id,
           name: item.name,
@@ -78,12 +82,14 @@ const getDetailEventById = (request, h) => {
     if (isEventFound) {
       return h.response({
         error: false,
-        message: 'success',
+        status: 'success',
+        message: 'Show event data by Id',
         detailEvent: isEventFound, 
       }).code(200);
     }
     
     const response = h.response({
+      error: true,
       status: 'fail',
       message: 'Event not found',
     });
@@ -106,6 +112,7 @@ const updateEventById = (request, h) => {
   
   if (!name) {
     return h.response({
+      error: true,
       status: 'fail',
       message: 'Event failed to Update. Please insert name of the event',
     }).code(400);
@@ -124,12 +131,14 @@ const updateEventById = (request, h) => {
       categories,
     };
     return h.response({
+      error: false,
       status: 'success',
-      message: 'Article has been updated',
+      message: 'Event has been updated',
     }).code(200);
   }
 
   const response = h.response({
+    error: true,
     status: 'fail',
     message: 'Event Failed to update. Event Id not found',
   });
@@ -145,12 +154,14 @@ const removeEventById = (request, h) => {
   if (isEventDeleted !== -1){
     events.splice(isEventDeleted, 1);
     return h.response({
+      error: false,
       status: 'success',
-      message: 'Article has been removed',
+      message: 'Event has been removed',
     }).code(200);
   }
 
   const response = h.response({
+    error: true,
     status: 'fail',
     message: 'Event failed to remove. Event Id not found',
   });

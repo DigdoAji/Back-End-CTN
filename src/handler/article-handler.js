@@ -16,6 +16,7 @@ const insertNewArticle = (request, h) => {
 
     if (!name) {
       return h.response({
+        error: true,
         status: 'fail',
         message: 'Failed Adding Article. Please insert name of the article',
       }).code(400);
@@ -34,6 +35,7 @@ const insertNewArticle = (request, h) => {
     const isDataInserted = articles.filter((articleInserted) => articleInserted.id === id).length > 0;
     if (isDataInserted) {
       return h.response({
+        error: false,
         status: 'success',
         message: 'New Article has been Added',
         articleId: id,
@@ -41,7 +43,8 @@ const insertNewArticle = (request, h) => {
     }
 
     const response = h.response({
-      status: 'error',
+      error: true,
+      status: 'fail',
       message: 'Article failed to add',
     });
     response.code(500);
@@ -52,7 +55,8 @@ const insertNewArticle = (request, h) => {
 const getAllArticles = (request, h) => {
     const response = h.response({
         error: false,
-        message: 'success',
+        status: 'success',
+        message: 'Show all article data',
         contentArticles: articles.map((item) => ({
           id: item.id,
           name: item.name,
@@ -75,12 +79,14 @@ const getDetailArticleById = (request, h) => {
     if (isArticleFound) {
       return h.response({
         error: false,
-        message: 'success',
+        status: 'success',
+        message: 'Show article data by ID',
         detailArticle: isArticleFound, 
       }).code(200);
     }
     
     const response = h.response({
+      error: true,
       status: 'fail',
       message: 'Article Not Found',
     });
@@ -102,6 +108,7 @@ const updateArticleById = (request, h) => {
   
   if (!name) {
     return h.response({
+      error: true,
       status: 'fail',
       message: 'Failed Update Article. Please insert name of the article',
     }).code(400);
@@ -119,12 +126,14 @@ const updateArticleById = (request, h) => {
       categories,
     };
     return h.response({
+      error: false,
       status: 'success',
       message: 'Article has been updated',
     }).code(200);
   }
 
   const response = h.response({
+    error: true,
     status: 'fail',
     message: 'Article failed to update. Article ID not found',
   });
@@ -140,12 +149,14 @@ const removeArticleById = (request, h) => {
   if (isArticleDeleted !== -1){
     articles.splice(isArticleDeleted, 1);
     return h.response({
+      error: false,
       status: 'success',
       message: 'Selected article has been removed',
     }).code(200);
   }
 
   const response = h.response({
+    error: true,
     status: 'fail',
     message: 'Selected article failed to remove. Article ID Not Found',
   });
