@@ -164,10 +164,109 @@ const removeArticleById = (request, h) => {
   return response;
 };
 
+// Adding Review Article
+const insertArticleReview = (request, h) => {
+  const {
+    id,
+    name,
+    review,
+  } = request.payload;
+
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const date = new Date().toLocaleDateString('en-GB', options);
+
+  if (!name) {
+    return h.response({
+      error: true,
+      status: 'fail',
+      message: 'Review article failed to added. Please insert your name',
+    }).code(400);
+  }
+
+  if (!id) {
+    return h.response({
+      error: true,
+      status: 'fail',
+      message: 'Review article failed to added. Article ID not found',
+    }).code(400);
+  }
+
+  const findIdArticle = articles.findIndex((articleIndex) => articleIndex.id === id);
+  articles[findIdArticle].userReviews.push({
+    name,
+    date,
+    review
+  });
+
+  const isReviewInserted = articles.filter((articleReview) => articleReview.id === id)[0];
+  if (isReviewInserted) {
+    return h.response({
+      error: false,
+      status: 'success',
+      message: 'show commment of selected article',
+      userReviews: articles[findIdArticle].userReviews.map((item) => ({
+        name: item.name,
+        date: item.date,
+        review: item.review
+      })),
+    }).code(200);
+  }
+
+  const response = h.response({
+    error: true,
+    status: 'error',
+    message: 'Review Article failed to add',
+  });
+  response.code(500);
+  return response;
+};
+
+// Delete Review Article
+const removeArticleReview = (request, h) => {
+  const { 
+    id,
+    name
+   } = request.payload;
+
+  if (!id) {
+    return h.response({
+      error: true,
+      status: 'fail',
+      message: 'Review article failed to added. Article ID not found',
+    }).code(400);
+  }
+  
+  const isReviewDeleted = articles.findIndex((articleIndex) => articleIndex.id === id);
+  const findReviewUser = articles.findIndex((user) => user.name === name);
+  if (isReviewDeleted !== -1){
+    articles[isReviewDeleted].userReviews.splice(findReviewUser, 1);
+    return h.response({
+      error: false,
+      status: 'success',
+      message: 'Review Article has been removed',
+      userReviews: articles[isReviewDeleted].userReviews.map((item) => ({
+        name: item.name,
+        date: item.date,
+        review: item.review
+      })),
+    }).code(200);
+  }
+
+  const response = h.response({
+    error: true,
+    status: 'fail',
+    message: 'Review Article failed to removed. Article ID not found',
+  });
+  response.code(404);
+  return response;
+};
+
 module.exports = { 
     insertNewArticle,
     getAllArticles,
     getDetailArticleById,
     updateArticleById,
     removeArticleById,
+    insertArticleReview,
+    removeArticleReview,
 };
