@@ -8,11 +8,12 @@ const insertNewArticle = (request, h) => {
       description,
       pictureId,
       publisherName,
-      publisherDate,
+      publishDate,
       categories,
     } = request.payload;
 
     const id = nanoid(16).toLowerCase();
+    const userReviews = [];
 
     if (!name) {
       return h.response({
@@ -28,8 +29,9 @@ const insertNewArticle = (request, h) => {
       description,
       pictureId,
       publisherName,
-      publisherDate,
+      publishDate,
       categories,
+      userReviews
     });
 
     const isDataInserted = articles.filter((articleInserted) => articleInserted.id === id).length > 0;
@@ -102,7 +104,7 @@ const updateArticleById = (request, h) => {
     description,
     pictureId,
     publisherName,
-    publisherDate,
+    publishDate,
     categories,
   } = request.payload;
   
@@ -122,7 +124,7 @@ const updateArticleById = (request, h) => {
       description,
       pictureId,
       publisherName,
-      publisherDate,
+      publishDate,
       categories,
     };
     return h.response({
