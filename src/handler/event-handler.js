@@ -14,6 +14,7 @@ const insertNewEvent = (request, h) => {
     } = request.payload;
 
     const id = nanoid(16).toLowerCase();
+    const userReviews = [];
 
     if (!name) {
       return h.response({
@@ -32,6 +33,7 @@ const insertNewEvent = (request, h) => {
       description,
       pictureId,
       categories,
+      userReviews
     });
 
     const isDataInserted = events.filter((eventInserted) => eventInserted.id === id).length > 0;
