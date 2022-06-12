@@ -4,6 +4,7 @@ const {
     getDetailArticleById,
     updateArticleById,
     removeArticleById,
+    insertArticleReview,
 } = require('./handler/article-handler');
 const { 
     insertNewEvent,
@@ -11,9 +12,11 @@ const {
     getDetailEventById,
     updateEventById,
     removeEventById,
+    insertEventReview,
 } = require('./handler/event-handler');
 
 const routes = [
+  
   // Article
   {
     method: 'POST',
@@ -40,6 +43,14 @@ const routes = [
     path: '/articles/{articleId}',
     handler: removeArticleById,
   },
+  
+  // Review Article
+  {
+    method: 'POST',
+    path: '/review-articles',
+    handler: insertArticleReview,
+  },
+
   // Event
   {
     method: 'POST',
@@ -65,6 +76,13 @@ const routes = [
     method: 'DELETE',
     path: '/events/{eventId}',
     handler: removeEventById,
+  },
+  
+  // Review Event
+  {
+    method: 'POST',
+    path: '/review-events',
+    handler: insertEventReview,
   },
 ];
  
