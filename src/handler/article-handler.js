@@ -226,47 +226,6 @@ const insertArticleReview = (request, h) => {
   return response;
 };
 
-// Delete Review Article
-const removeArticleReview = (request, h) => {
-  const { 
-    id,
-    reviewId,
-   } = request.payload;
-
-  if (!id) {
-    return h.response({
-      error: true,
-      status: 'fail',
-      message: 'Review article failed to added. Article ID not found',
-    }).code(400);
-  }
-  
-  const isReviewDeleted = articles.findIndex((articleIndex) => articleIndex.id === id);
-  const findReviewUser = articles[isReviewDeleted].userReviews.findIndex((user) => user.reviewId === reviewId);
-  if (isReviewDeleted !== -1){
-    articles[isReviewDeleted].userReviews.splice(findReviewUser, 1);
-    return h.response({
-      error: false,
-      status: 'success',
-      message: 'Review Article has been removed',
-      userReviews: articles[isReviewDeleted].userReviews.map((item) => ({
-        reviewId : item.reviewId,
-        name: item.name,
-        date: item.date,
-        review: item.review
-      })),
-    }).code(200);
-  }
-
-  const response = h.response({
-    error: true,
-    status: 'fail',
-    message: 'Review Article failed to removed. Article ID not found',
-  });
-  response.code(404);
-  return response;
-};
-
 module.exports = { 
     insertNewArticle,
     getAllArticles,
@@ -274,5 +233,4 @@ module.exports = {
     updateArticleById,
     removeArticleById,
     insertArticleReview,
-    removeArticleReview,
 };

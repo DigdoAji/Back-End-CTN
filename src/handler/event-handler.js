@@ -231,47 +231,6 @@ const insertEventReview = (request, h) => {
   return response;
 };
 
-// Delete Review Event
-const removeEventReview = (request, h) => {
-  const { 
-    id,
-    reviewId,
-   } = request.payload;
-
-  if (!id) {
-    return h.response({
-      error: true,
-      status: 'fail',
-      message: 'Review event failed to added. Event ID not found',
-    }).code(400);
-  }
-  
-  const isReviewDeleted = events.findIndex((eventIndex) => eventIndex.id === id);
-  const findReviewUser = events[isReviewDeleted].userReviews.findIndex((user) => user.reviewId === reviewId);
-  if (isReviewDeleted !== -1){
-    events[isReviewDeleted].userReviews.splice(findReviewUser, 1);
-    return h.response({
-      error: false,
-      status: 'success',
-      message: 'Review event has been removed',
-      userReviews: events[isReviewDeleted].userReviews.map((item) => ({
-        reviewId : item.reviewId,
-        name: item.name,
-        date: item.date,
-        review: item.review
-      })),
-    }).code(200);
-  }
-
-  const response = h.response({
-    error: true,
-    status: 'fail',
-    message: 'Review event failed to removed. Event ID not found',
-  });
-  response.code(404);
-  return response;
-};
-
 module.exports = { 
   insertNewEvent,
   getAllEvents,
@@ -279,5 +238,4 @@ module.exports = {
   updateEventById,
   removeEventById,
   insertEventReview,
-  removeEventReview,
 };
