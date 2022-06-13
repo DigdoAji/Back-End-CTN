@@ -31,7 +31,7 @@ const insertNewArticle = (request, h) => {
       publisherName,
       publishDate,
       categories,
-      userReviews
+      userReviews,
     });
 
     const isDataInserted = articles.filter((articleInserted) => articleInserted.id === id).length > 0;
@@ -199,7 +199,7 @@ const insertArticleReview = (request, h) => {
     reviewId,
     name,
     date,
-    review
+    review,
   });
 
   const isReviewInserted = articles.filter((articleReview) => articleReview.id === id)[0];
@@ -209,10 +209,10 @@ const insertArticleReview = (request, h) => {
       status: 'success',
       message: 'show commment of selected article',
       userReviews: articles[findIdArticle].userReviews.map((item) => ({
-        reviewId : item.reviewId,
+        reviewId: item.reviewId,
         name: item.name,
         date: item.date,
-        review: item.review
+        review: item.review,
       })),
     }).code(200);
   }

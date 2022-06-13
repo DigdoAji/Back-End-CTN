@@ -33,7 +33,7 @@ const insertNewEvent = (request, h) => {
       description,
       pictureId,
       categories,
-      userReviews
+      userReviews,
     });
 
     const isDataInserted = events.filter((eventInserted) => eventInserted.id === id).length > 0;
@@ -204,7 +204,7 @@ const insertEventReview = (request, h) => {
     reviewId,
     name,
     date,
-    review
+    review,
   });
 
   const isReviewInserted = events.filter((eventReview) => eventReview.id === id)[0];
@@ -214,10 +214,10 @@ const insertEventReview = (request, h) => {
       status: 'success',
       message: 'show comment of selected event',
       userReviews: events[findIdEvent].userReviews.map((item) => ({
-        reviewId : item.reviewId,
+        reviewId: item.reviewId,
         name: item.name,
         date: item.date,
-        review: item.review
+        review: item.review,
       })),
     }).code(200);
   }

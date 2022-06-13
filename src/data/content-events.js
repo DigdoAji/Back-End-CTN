@@ -10,7 +10,7 @@ const contentEvents = [
         categories: 'Culture, Festival',
         userReviews: [
           {
-              reviewId: "wcuq4z",
+              reviewId: 'wcuq4z',
               name: 'Roni',
               date: '24 February 2022',
               review: 'My Culture My Life!',
@@ -28,13 +28,13 @@ const contentEvents = [
         categories: 'Tourism, Culture',
         userReviews: [
           {
-              reviewId: "2aitr0",
+              reviewId: '2aitr0',
               name: 'Indra',
               date: '10 April 2022',
               review: 'Let introduction of Our Traditional Dance',
           },
           {
-              reviewId: "vvazjy",
+              reviewId: 'vvazjy',
               name: 'Tasya',
               date: '11 April 2022',
               review: 'I will come to that event',
@@ -52,13 +52,13 @@ const contentEvents = [
         categories: 'Tourism, Culture, Competition',
         userReviews: [
           {
-              reviewId: "bemx6n",
+              reviewId: 'bemx6n',
               name: 'Jaka',
               date: '1 May 2022',
               review: 'Best competition must come!',
           },
           {
-              reviewId: "4hmfcy",
+              reviewId: '4hmfcy',
               name: 'Ihsan',
               date: '10 May 2022',
               review: 'its from my hometown',
@@ -76,7 +76,7 @@ const contentEvents = [
         categories: 'Culture, Festival',
         userReviews: [
           {
-              reviewId: "zvbv8w",
+              reviewId: 'zvbv8w',
               name: 'Lendra',
               date: '30 May 2022',
               review: 'Interesting Festival',

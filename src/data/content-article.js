@@ -9,13 +9,13 @@ const contentArticles = [
         categories: 'Tourism',
         userReviews: [
           {
-              reviewId: "exxr6l",
+              reviewId: 'exxr6l',
               name: 'Bagas',
               date: '20 May 2022',
               review: 'Best spot ever and instagramable!',
           },
           {
-              reviewId: "99662x",
+              reviewId: '99662x',
               name: 'Putri',
               date: '21 may 2022',
               review: 'Samosir is Very Beautiful',
@@ -32,7 +32,7 @@ const contentArticles = [
         categories: 'Tourism',
         userReviews: [
           {
-              reviewId: "oki772",
+              reviewId: 'oki772',
               name: 'Ahmad',
               date: '25 May 2022',
               review: 'This is where you can relax and enjoy the nature',
@@ -49,13 +49,13 @@ const contentArticles = [
         categories: 'Tourism',
         userReviews: [
           {
-              reviewId: "uac4zj",
+              reviewId: 'uac4zj',
               name: 'Raden',
               date: '30 May 2022',
               review: 'What a nice view',
           },
           {
-              reviewId: "mn0ckf",
+              reviewId: 'mn0ckf',
               name: 'Halmahera',
               date: '31 May 2022',
               review: 'Beautiful and Very Exotic',
@@ -72,13 +72,13 @@ const contentArticles = [
         categories: 'Culture',
         userReviews: [
           {
-              reviewId: "fjozmt",
+              reviewId: 'fjozmt',
               name: 'Salim',
               date: '3 June 2022',
               review: 'What a unique culture',
           },
           {
-              reviewId: "nsitip",  
+              reviewId: 'nsitip',  
               name: 'Jane',
               date: '4 June 2022',
               review: 'Indonesia so unique',
