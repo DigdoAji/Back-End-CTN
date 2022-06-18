@@ -1,3 +1,4 @@
+const Joi = require('joi');
 const { 
     insertNewArticle,
     getAllArticles,
@@ -22,6 +23,18 @@ const routes = [
     method: 'POST',
     path: '/articles',
     handler: insertNewArticle,
+    options: {
+      validate: {
+        payload: Joi.object({
+          name: Joi.string().required(),
+          description: Joi.string().required(),
+          pictureId: Joi.string().optional(),
+          publisherName: Joi.string().required(),
+          publishDate: Joi.string().required(),
+          categories: Joi.string().required(),
+        }),
+      },
+  },
   },
   {
     method: 'GET',
@@ -37,6 +50,18 @@ const routes = [
     method: 'PUT',
     path: '/articles/{articleId}',
     handler: updateArticleById,
+    options: {
+      validate: {
+        payload: Joi.object({
+          name: Joi.string().required(),
+          description: Joi.string().required(),
+          pictureId: Joi.string().optional(),
+          publisherName: Joi.string().required(),
+          publishDate: Joi.string().required(),
+          categories: Joi.string().required(),
+        }),
+      },
+    },
   },
   {
     method: 'DELETE',
@@ -49,6 +74,15 @@ const routes = [
     method: 'POST',
     path: '/review-articles',
     handler: insertArticleReview,
+    options: {
+      validate: {
+        payload: Joi.object({
+          id: Joi.string().required(),
+          name: Joi.string().required(),
+          review: Joi.string().required(),
+        }),
+      },
+    },
   },
 
   // Event
@@ -56,6 +90,20 @@ const routes = [
     method: 'POST',
     path: '/events',
     handler: insertNewEvent,
+    options: {
+      validate: {
+        payload: Joi.object({
+          name: Joi.string().required(),
+          location: Joi.string().required(),
+          date: Joi.string().required(),
+          time: Joi.string().required(),
+          timezone: Joi.string().required(),
+          description: Joi.string().required(),
+          pictureId: Joi.string().optional(),
+          categories: Joi.string().required(),
+        }),
+      },
+    },
   },
   {
     method: 'GET',
@@ -71,6 +119,20 @@ const routes = [
     method: 'PUT',
     path: '/events/{eventId}',
     handler: updateEventById,
+    options: {
+      validate: {
+        payload: Joi.object({
+          name: Joi.string().required(),
+          location: Joi.string().required(),
+          date: Joi.string().required(),
+          time: Joi.string().required(),
+          timezone: Joi.string().required(),
+          description: Joi.string().required(),
+          pictureId: Joi.string().optional(),
+          categories: Joi.string().required(),
+        }),
+      },
+    },
   },
   {
     method: 'DELETE',
@@ -83,6 +145,15 @@ const routes = [
     method: 'POST',
     path: '/review-events',
     handler: insertEventReview,
+    options: {
+      validate: {
+        payload: Joi.object({
+          id: Joi.string().required(),
+          name: Joi.string().required(),
+          review: Joi.string().required(),
+        }),
+      },
+    },
   },
 ];
  
