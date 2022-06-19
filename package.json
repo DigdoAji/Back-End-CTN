@@ -1,8 +1,8 @@
 {
-  "name": "bookshelf-api",
+  "name": "back-end-ctn-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon ./src/server.js",
     "lint": "eslint ./src"
