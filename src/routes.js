@@ -77,7 +77,7 @@ const routes = [
     options: {
       validate: {
         payload: Joi.object({
-          id: Joi.string().required(),
+          _id: Joi.string().required(),
           name: Joi.string().required(),
           review: Joi.string().required(),
         }),
@@ -148,7 +148,7 @@ const routes = [
     options: {
       validate: {
         payload: Joi.object({
-          id: Joi.string().required(),
+          _id: Joi.string().required(),
           name: Joi.string().required(),
           review: Joi.string().required(),
         }),

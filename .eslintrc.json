@@ -17,6 +17,7 @@
         "eol-last": "off",
         "indent": "off",
         "space-before-blocks":"off",
-        "max-len":"off"
+        "max-len":"off",
+        "import/newline-after-import": "off"
     }
 }

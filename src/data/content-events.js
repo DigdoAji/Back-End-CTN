@@ -1,6 +1,5 @@
 const contentEvents = [
     {
-        id: 'w245tke54nsgvbku',
         name: 'Rinjani Begawe Festival',
         location: 'Senaru, West Nusa Tenggara',
         date: '2022-03-10',
@@ -19,7 +18,6 @@ const contentEvents = [
         ],
       },
       {
-        id: 'cn6oeawy7rtftrcq',
         name: "World Dance Day 2020 Toraya Ma'Gellu",
         location: 'Buntu Pune, South Celebes',
         date: '2022-04-26',
@@ -44,7 +42,6 @@ const contentEvents = [
         ],
       },
       {
-        id: 'ea13o4yd4kxc4ioo',
         name: 'Banjar Traditional Rowboat Competition',
         location: 'Martapura, South Borneo',
         date: '2022-05-15',
@@ -69,7 +66,6 @@ const contentEvents = [
         ],
       },
       {
-        id: '6pgb0ldp1dofiijr',
         name: 'Saijan Culture Festival 2022',
         location: 'Kotabaru, South Borneo',
         date: '2022-06-04',

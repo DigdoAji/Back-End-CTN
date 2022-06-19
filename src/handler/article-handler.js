@@ -1,30 +1,19 @@
 const { nanoid } = require('nanoid');
-const articles = require('../data/content-article');
+const Articles = require('../models/article');
 
 // Adding New Article
-const insertNewArticle = (request, h) => {
-    const {
-      name,
-      description,
-      pictureId,
-      publisherName,
-      publishDate,
-      categories,
-    } = request.payload;
+const insertNewArticle = async (request, h) => {
+  const {
+    name,
+    description,
+    pictureId,
+    publisherName,
+    publishDate,
+    categories,
+  } = request.payload;
+  const userReviews = [];
 
-    const id = nanoid(16).toLowerCase();
-    const userReviews = [];
-
-    if (!name) {
-      return h.response({
-        error: true,
-        status: 'fail',
-        message: 'Failed Adding Article. Please insert name of the article',
-      }).code(400);
-    }
-
-    articles.push({
-      id,
+  const articles = new Articles({
       name,
       description,
       pictureId,
@@ -32,72 +21,69 @@ const insertNewArticle = (request, h) => {
       publishDate,
       categories,
       userReviews,
-    });
+  });
 
-    const isDataInserted = articles.filter((articleInserted) => articleInserted.id === id).length > 0;
-    if (isDataInserted) {
-      return h.response({
-        error: false,
-        status: 'success',
-        message: 'New Article has been Added',
-        articleId: id,
-      }).code(201);
-    }
-
-    const response = h.response({
+  if (!name) {
+    return h.response({
       error: true,
       status: 'fail',
-      message: 'Article failed to add',
-    });
-    response.code(500);
-    return response;
+      message: 'Failed Adding Article. Please insert name of the article',
+    }).code(400);
+  }
+
+  const result = await articles.save();
+
+  try {
+    return h.response({
+      error: false,
+      status: 'success',
+      message: 'New Article has been Added',
+      articleId: result.id,
+    }).code(201);
+  } catch (err) {
+    return err;
+  }
 };
 
 // Get All Articles
-const getAllArticles = (request, h) => {
+const getAllArticles = async (request, h) => {
+  const result = await Articles.find();
+
+  try {
     const response = h.response({
-        error: false,
-        status: 'success',
-        message: 'Show all article data',
-        contentArticles: articles.map((item) => ({
-          id: item.id,
-          name: item.name,
-          description: item.description,
-          pictureId: item.pictureId,
-          publisherName: item.publisherName,
-          publishDate: item.publishDate,
-          categories: item.categories,
-        })),
+      error: false,
+      status: 'success',
+      message: 'Show all article data',
+      contentArticles: result,
     });
     response.code(200);
     return response;
-  };
+  } catch (err) {
+    return err;
+  }
+};
 
 // Get Detail Article By Id
-const getDetailArticleById = (request, h) => {
-    const { articleId } = request.params;
-    const isArticleFound = articles.filter((articleDetail) => articleDetail.id === articleId)[0];
+const getDetailArticleById = async (request, h) => {
+  const { articleId } = request.params;
+  const result = await Articles.findById(articleId);
 
-    if (isArticleFound) {
-      return h.response({
-        error: false,
-        status: 'success',
-        message: 'Show article data by ID',
-        detailArticle: isArticleFound, 
-      }).code(200);
-    }
-    
+  try {
     const response = h.response({
-      error: true,
-      status: 'fail',
-      message: 'Article Not Found',
+      error: false,
+      status: 'success',
+      message: 'Show article data by ID',
+      detailArticle: result,
     });
-    response.code(404);
+    response.code(200);
     return response;
+  } catch (err) {
+    return err;
+  }
 };
 
 // Update or Edit Article Item By Id
-const updateArticleById = (request, h) => {
+const updateArticleById = async (request, h) => {
   const { articleId } = request.params;
   const {
     name,
@@ -107,69 +93,61 @@ const updateArticleById = (request, h) => {
     publishDate,
     categories,
   } = request.payload;
-  
+
+  await Articles.findByIdAndUpdate(articleId, {
+    name,
+    description,
+    pictureId,
+    publisherName,
+    publishDate,
+    categories,
+  });
+
   if (!name) {
     return h.response({
       error: true,
       status: 'fail',
-      message: 'Failed Update Article. Please insert name of the article',
+      message: 'Failed Adding Article. Please insert name of the article',
     }).code(400);
   }
-  
-  const isArticleUpdated = articles.findIndex((articleUpdated) => articleUpdated.id === articleId);
-  if (isArticleUpdated !== -1){
-    articles[isArticleUpdated] = {
-      ...articles[isArticleUpdated],
-      name,
-      description,
-      pictureId,
-      publisherName,
-      publishDate,
-      categories,
-    };
-    return h.response({
+
+  try {
+    const findIdArticle = await Articles.findById(articleId);
+    const response = h.response({
       error: false,
       status: 'success',
       message: 'Article has been updated',
-    }).code(200);
+      detailArticle: findIdArticle,
+    });
+    response.code(200);
+    return response;
+  } catch (err) {
+    return err;
   }
-
-  const response = h.response({
-    error: true,
-    status: 'fail',
-    message: 'Article failed to update. Article ID not found',
-  });
-  response.code(404);
-  return response;
 };
 
 // Delete Article By Id
-const removeArticleById = (request, h) => {
+const removeArticleById = async (request, h) => {
   const { articleId } = request.params;
-  const isArticleDeleted = articles.findIndex((articleDeleted) => articleDeleted.id === articleId);
+  await Articles.findByIdAndRemove(articleId);
 
-  if (isArticleDeleted !== -1){
-    articles.splice(isArticleDeleted, 1);
-    return h.response({
+  try {
+    const response = h.response({
       error: false,
       status: 'success',
       message: 'Selected article has been removed',
-    }).code(200);
+    });
+    response.code(200);
+    return response;
+  } catch (err) {
+    return err;
   }
-
-  const response = h.response({
-    error: true,
-    status: 'fail',
-    message: 'Selected article failed to remove. Article ID Not Found',
-  });
-  response.code(404);
-  return response;
 };
 
 // Adding Review Article
-const insertArticleReview = (request, h) => {
+const insertArticleReview = async (request, h) => {
   const {
-    id,
+    _id,
     name,
     review,
   } = request.payload;
@@ -185,45 +163,45 @@ const insertArticleReview = (request, h) => {
       message: 'Review article failed to added. Please insert your name',
     }).code(400);
   }
-
-  if (!id) {
+  
+  if (!_id) {
     return h.response({
       error: true,
       status: 'fail',
       message: 'Review article failed to added. Article ID not found',
-    }).code(400);
+    }).code(404);
   }
 
-  const findIdArticle = articles.findIndex((articleIndex) => articleIndex.id === id);
-  articles[findIdArticle].userReviews.push({
-    reviewId,
-    name,
-    date,
-    review,
+  await Articles.findByIdAndUpdate({ _id }, {
+    $push: {
+      userReviews: {
+        reviewId,
+        name,
+        date,
+        review,
+      },
+    },
   });
 
-  const isReviewInserted = articles.filter((articleReview) => articleReview.id === id)[0];
-  if (isReviewInserted) {
+  const isReviewArticleAdded = await Articles.findById({ _id }, {
+      userReviews: {
+        reviewId,
+        name,
+        date,
+        review,
+      },
+  });
+
+  try {
     return h.response({
       error: false,
       status: 'success',
-      message: 'show commment of selected article',
-      userReviews: articles[findIdArticle].userReviews.map((item) => ({
-        reviewId: item.reviewId,
-        name: item.name,
-        date: item.date,
-        review: item.review,
-      })),
-    }).code(200);
+      message: 'New comment Added. Show commment of selected article',
+      userReviews: isReviewArticleAdded.userReviews,
+    }).code(201); 
+  } catch (err) {
+    return err;
   }
-
-  const response = h.response({
-    error: true,
-    status: 'error',
-    message: 'Review Article failed to add',
-  });
-  response.code(500);
-  return response;
 };
 
 module.exports = { 
