@@ -6,6 +6,7 @@ const {
     updateArticleById,
     removeArticleById,
     insertArticleReview,
+    getCategoriesArticle,
 } = require('../handler/article-handler');
 
 const ArticleRoutes = [
@@ -75,6 +76,13 @@ const ArticleRoutes = [
         }),
       },
     },
+  },
+
+  // Find Categories Articles
+  {
+    method: 'GET',
+    path: '/articles/find',
+    handler: getCategoriesArticle,
   },
 ];
  

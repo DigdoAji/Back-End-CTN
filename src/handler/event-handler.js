@@ -212,6 +212,25 @@ const insertEventReview = async (request, h) => {
   }
 };
 
+// Get Selected Categories Event
+const getCategoriesEvent = async (request, h) => {
+  const { categories } = request.query;
+  const result = await Events.find({ categories });
+
+  try {
+    const response = h.response({
+      error: false,
+      status: 'success',
+      message: 'Show article data',
+      contentEvents: result,
+    });
+    response.code(200);
+    return response;
+  } catch (err) {
+    return err;
+  }
+};
+
 module.exports = { 
   insertNewEvent,
   getAllEvents,
@@ -219,4 +238,5 @@ module.exports = {
   updateEventById,
   removeEventById,
   insertEventReview,
+  getCategoriesEvent,
 };

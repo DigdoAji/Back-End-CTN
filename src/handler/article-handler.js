@@ -204,6 +204,25 @@ const insertArticleReview = async (request, h) => {
   }
 };
 
+// Get Selected Categories Article
+const getCategoriesArticle = async (request, h) => {
+  const { categories } = request.query;
+  const result = await Articles.find({ categories });
+
+  try {
+    const response = h.response({
+      error: false,
+      status: 'success',
+      message: 'Show article data',
+      contentArticles: result,
+    });
+    response.code(200);
+    return response;
+  } catch (err) {
+    return err;
+  }
+};
+
 module.exports = { 
     insertNewArticle,
     getAllArticles,
@@ -211,4 +230,5 @@ module.exports = {
     updateArticleById,
     removeArticleById,
     insertArticleReview,
+    getCategoriesArticle,
 };

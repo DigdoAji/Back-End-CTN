@@ -6,6 +6,7 @@ const {
     updateEventById,
     removeEventById,
     insertEventReview,
+    getCategoriesEvent,
 } = require('../handler/event-handler');
 
 const EventRoutes = [
@@ -78,6 +79,13 @@ const EventRoutes = [
         }),
       },
     },
+  },
+
+  // Find Categories Events
+  {
+    method: 'GET',
+    path: '/events/find',
+    handler: getCategoriesEvent,
   },
 ];
  
