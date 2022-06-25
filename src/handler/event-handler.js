@@ -1,180 +1,161 @@
 const { nanoid } = require('nanoid');
-const events = require('../data/content-events');
+const Events = require('../models/event');
 
 // Adding New Event
-const insertNewEvent = (request, h) => {
-    const {
-      name,
-      location,
-      date,
-      time,
-      description,
-      pictureId,
-      categories,
-    } = request.payload;
+const insertNewEvent = async (request, h) => {
+  const {
+    name,
+    location,
+    date,
+    time,
+    timezone,
+    description,
+    pictureId,
+    categories,
+  } = request.payload;
+  const userReviews = [];
 
-    const id = nanoid(16).toLowerCase();
-    const userReviews = [];
+  const events = new Events({
+    name,
+    location,
+    date,
+    time,
+    timezone,
+    description,
+    pictureId,
+    categories,
+    userReviews,
+  });
 
-    if (!name) {
-      return h.response({
-        error: true,
-        status: 'fail',
-        message: 'Failed Adding Event. Please insert name of the event',
-      }).code(400);
-    }
-
-    events.push({
-      id,
-      name,
-      location,
-      date,
-      time,
-      description,
-      pictureId,
-      categories,
-      userReviews
-    });
-
-    const isDataInserted = events.filter((eventInserted) => eventInserted.id === id).length > 0;
-    if (isDataInserted) {
-      return h.response({
-        error: false,
-        status: 'success',
-        message: 'New Event has been Added',
-        eventId: id,
-      }).code(201);
-    }
-
-    const response = h.response({
+  if (!name) {
+    return h.response({
       error: true,
-      status: 'error',
-      message: 'Event failed to add',
-    });
-    response.code(500);
-    return response;
+      status: 'fail',
+      message: 'Failed Adding Event. Please insert name of the event',
+    }).code(400);
+  }
+
+  const result = await events.save();
+
+  try {
+    return h.response({
+      error: false,
+      status: 'success',
+      message: 'New Event has been Added',
+      eventId: result.id,
+    }).code(201);
+  } catch (err) {
+    return err;
+  }
 };
 
 // Get All events
-const getAllEvents = (request, h) => {
+const getAllEvents = async (request, h) => {
+  const result = await Events.find();
+
+  try {
     const response = h.response({
       error: false,
       status: 'success',
       message: 'Show all event data',
-        contentEvents: events.map((item) => ({
-          id: item.id,
-          name: item.name,
-          location: item.location,
-          date: item.date,
-          time: item.time,
-          description: item.description,
-          pictureId: item.pictureId,
-          categories: item.categories,
-        })),
+      contentEvents: result,
     });
     response.code(200);
     return response;
-  };
+  } catch (err) {
+    return err;
+  }
+};
 
 // Get Detail Event By Id
-const getDetailEventById = (request, h) => {
-    const { eventId } = request.params;
-    const isEventFound = events.filter((eventDetail) => eventDetail.id === eventId)[0];
+const getDetailEventById = async (request, h) => {
+  const { eventId } = request.params;
+  const result = await Events.findById(eventId);
 
-    if (isEventFound) {
-      return h.response({
-        error: false,
-        status: 'success',
-        message: 'Show event data by ID',
-        detailEvent: isEventFound, 
-      }).code(200);
-    }
-    
+  try {
     const response = h.response({
-      error: true,
-      status: 'fail',
-      message: 'Event not found',
+      error: false,
+      status: 'success',
+      message: 'Show event data by ID',
+      detailEvent: result,
     });
-    response.code(404);
+    response.code(200);
     return response;
+  } catch (err) {
+    return err;
+  }
 };
 
 // Update or Edit Event Item By Id
-const updateEventById = (request, h) => {
+const updateEventById = async (request, h) => {
   const { eventId } = request.params;
   const {
     name,
     location,
     date,
     time,
+    timezone,
     description,
     pictureId,
     categories,
   } = request.payload;
   
+  await Events.findByIdAndUpdate(eventId, {
+    name,
+    location,
+    date,
+    time,
+    timezone,
+    description,
+    pictureId,
+    categories,
+  });
+
   if (!name) {
     return h.response({
       error: true,
       status: 'fail',
-      message: 'Event failed to Update. Please insert name of the event',
+      message: 'Failed Adding Event. Please insert name of the event',
     }).code(400);
   }
   
-  const isEventUpdated = events.findIndex((eventUpdated) => eventUpdated.id === eventId);
-  if (isEventUpdated !== -1){
-    events[isEventUpdated] = {
-      ...events[isEventUpdated],
-      name,
-      location,
-      date,
-      time,
-      description,
-      pictureId,
-      categories,
-    };
-    return h.response({
+  try {
+    const findIdEvent = await Events.findById(eventId);
+    const response = h.response({
       error: false,
       status: 'success',
       message: 'Event has been updated',
-    }).code(200);
+      detailEvent: findIdEvent,
+    });
+    response.code(200);
+    return response;
+  } catch (err) {
+    return err;
   }
-
-  const response = h.response({
-    error: true,
-    status: 'fail',
-    message: 'Event Failed to update. Event ID not found',
-  });
-  response.code(404);
-  return response;
 };
 
 // Delete Event By Id
-const removeEventById = (request, h) => {
+const removeEventById = async (request, h) => {
   const { eventId } = request.params;
-  const isEventDeleted = events.findIndex((eventDeleted) => eventDeleted.id === eventId);
+  await Events.findByIdAndRemove(eventId);
 
-  if (isEventDeleted !== -1){
-    events.splice(isEventDeleted, 1);
-    return h.response({
+  try {
+    const response = h.response({
       error: false,
       status: 'success',
-      message: 'Event has been removed',
-    }).code(200);
+      message: 'Selected event has been removed',
+    });
+    response.code(200);
+    return response;
+  } catch (err) {
+    return err;
   }
-
-  const response = h.response({
-    error: true,
-    status: 'fail',
-    message: 'Event failed to remove. Event ID not found',
-  });
-  response.code(404);
-  return response;
 };
 
 // Adding Review Event
-const insertEventReview = (request, h) => {
+const insertEventReview = async (request, h) => {
   const {
-    id,
+    _id,
     name,
     review,
   } = request.payload;
@@ -190,45 +171,64 @@ const insertEventReview = (request, h) => {
       message: 'Review event failed to added. Please insert your name',
     }).code(400);
   }
-
-  if (!id) {
+  
+  if (!_id) {
     return h.response({
       error: true,
       status: 'fail',
       message: 'Review event failed to added. Event ID not found',
-    }).code(400);
+    }).code(404);
   }
 
-  const findIdEvent = events.findIndex((eventIndex) => eventIndex.id === id);
-  events[findIdEvent].userReviews.push({
-    reviewId,
-    name,
-    date,
-    review
+  await Events.findByIdAndUpdate({ _id }, {
+    $push: {
+      userReviews: {
+        reviewId,
+        name,
+        date,
+        review,
+      },
+    },
   });
 
-  const isReviewInserted = events.filter((eventReview) => eventReview.id === id)[0];
-  if (isReviewInserted) {
+  const isReviewInserted = await Events.findById({ _id }, {
+      userReviews: {
+        reviewId,
+        name,
+        date,
+        review,
+      },
+  });
+
+  try {
     return h.response({
       error: false,
       status: 'success',
-      message: 'show comment of selected event',
-      userReviews: events[findIdEvent].userReviews.map((item) => ({
-        reviewId : item.reviewId,
-        name: item.name,
-        date: item.date,
-        review: item.review
-      })),
-    }).code(200);
+      message: 'New comment Added. Show commment of selected event',
+      userReviews: isReviewInserted.userReviews,
+    }).code(201); 
+  } catch (err) {
+    return err;
   }
+};
 
-  const response = h.response({
-    error: true,
-    status: 'error',
-    message: 'Review event failed to add',
-  });
-  response.code(500);
-  return response;
+// Get Selected Categories Event
+const getCategoriesEvent = async (request, h) => {
+  const { categories } = request.query;
+  const result = await Events.find({ categories });
+
+  try {
+    const response = h.response({
+      error: false,
+      status: 'success',
+      message: 'Show article data',
+      contentEvents: result,
+    });
+    response.code(200);
+    return response;
+  } catch (err) {
+    return err;
+  }
 };
 
 module.exports = { 
@@ -238,4 +238,5 @@ module.exports = {
   updateEventById,
   removeEventById,
   insertEventReview,
+  getCategoriesEvent,
 };

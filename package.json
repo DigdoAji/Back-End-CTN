@@ -1,8 +1,8 @@
 {
-  "name": "bookshelf-api",
+  "name": "back-end-ctn-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon ./src/server.js",
     "lint": "eslint ./src"
@@ -18,6 +18,8 @@
   },
   "dependencies": {
     "@hapi/hapi": "^20.2.1",
+    "joi": "^17.6.0",
+    "mongoose": "^6.4.0",
     "nanoid": "^3.3.2"
   }
 }
