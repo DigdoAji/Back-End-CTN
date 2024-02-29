@@ -13,7 +13,7 @@ This is a repository for the Back-End CTN (Culture and Tour Nusantara) project t
 ## Tech Stacks Used
 
 ![JavaScript](https://img.shields.io/badge/JavaScript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![HapiJS](https://img.shields.io/badge/HapiJS-%231572B6.svg?style=for-the-badge&logo=hapijs&logoColor=%23F7DF1E)
+![HapiJS](https://img.shields.io/badge/HapiJS-%231572B6.svg?style=for-the-badge&logo=sqlite&logoColor=%23F7DF1E)
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 
 ## About Capstone Project
