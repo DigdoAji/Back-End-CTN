@@ -26,6 +26,6 @@ Capstone Project New Group No. 91 (CPNG-91)
 
 ## Status Project
 
-- Does it have an API link? : `No`
+- Does it have an API Key? : `No`
 - Is it running in `local` mode? : `Yes`
 - Is MongoDB still active?: `No`. Now MongoDB access is `Inactive / Expired`
